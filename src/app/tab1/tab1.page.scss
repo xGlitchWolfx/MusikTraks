@@ -1,0 +1,251 @@
+ion-toolbar {
+  --background: #101114;
+  --color: #f7f7f2;
+}
+
+ion-menu-button {
+  --color: #f6c90e;
+}
+
+.trak-page {
+  --background: #0d0e11;
+}
+
+.trak-hero {
+  background: #f6c90e;
+  border-radius: 28px;
+  color: #101114;
+  display: grid;
+  gap: 12px;
+  margin: 18px;
+  padding: 22px;
+  text-align: center;
+}
+
+.trak-hero img {
+  border-radius: 26px;
+  height: 104px;
+  margin: 0 auto;
+  object-fit: cover;
+  width: 104px;
+}
+
+.trak-hero p {
+  font-size: 13px;
+  font-weight: 900;
+  margin: 0;
+  text-transform: uppercase;
+}
+
+.trak-hero h1 {
+  font-size: clamp(34px, 10vw, 54px);
+  line-height: 0.96;
+  margin: 0;
+}
+
+.trak-hero button {
+  background: #101114;
+  border: 0;
+  border-radius: 18px;
+  color: #f6c90e;
+  font-size: 17px;
+  font-weight: 900;
+  min-height: 56px;
+}
+
+.trak-hero button.is-rolling {
+  animation: buttonPop 520ms ease-in-out infinite alternate;
+}
+
+.roulette-card,
+.state-card,
+.result-card {
+  margin: 18px;
+}
+
+.roulette-card {
+  background: #1a1c22;
+  border: 1px solid #2a2d35;
+  border-radius: 24px;
+  overflow: hidden;
+  padding: 14px;
+  position: relative;
+}
+
+.roulette-window {
+  display: grid;
+  gap: 10px;
+  grid-auto-flow: column;
+  grid-template-columns: 34% 1fr 34%;
+  overflow: hidden;
+  transition: transform 120ms ease-out;
+}
+
+.roulette-window span {
+  background: #f6c90e;
+  border-radius: 18px;
+  color: #101114;
+  font-size: 18px;
+  font-weight: 900;
+  padding: 18px 12px;
+  text-align: center;
+  transition: opacity 160ms ease, transform 160ms ease;
+}
+
+.roulette-window span:not(.is-center) {
+  opacity: 0.45;
+  transform: scale(0.86);
+}
+
+.roulette-window .is-center {
+  box-shadow: 0 0 0 3px rgba(246, 201, 14, 0.22);
+  transform: scale(1);
+}
+
+.roulette-card.is-rolling .is-center {
+  animation: genreTick 180ms ease-out;
+}
+
+.roulette-card.has-winner .is-winner {
+  animation: winnerPulse 680ms ease-out 2;
+}
+
+.center-marker {
+  border: 2px solid #f6c90e;
+  border-radius: 22px;
+  bottom: 10px;
+  left: 36%;
+  pointer-events: none;
+  position: absolute;
+  right: 36%;
+  top: 10px;
+  z-index: 2;
+}
+
+.state-card,
+.result-card {
+  background: #1a1c22;
+  border: 1px solid #2a2d35;
+  border-radius: 26px;
+  color: #f7f7f2;
+  padding: 14px;
+}
+
+.state-card h2 {
+  margin: 0 0 6px;
+}
+
+.state-card p {
+  color: #a7a7a7;
+  margin: 0;
+}
+
+.result-card {
+  display: grid;
+  gap: 14px;
+  max-width: 560px;
+  position: relative;
+}
+
+.result-card img {
+  aspect-ratio: 1;
+  border-radius: 22px;
+  max-height: 420px;
+  object-fit: cover;
+  width: 100%;
+}
+
+.result-card h2 {
+  font-size: clamp(24px, 7vw, 38px);
+  line-height: 1;
+  margin: 10px 0 6px;
+}
+
+.result-card p {
+  color: #a7a7a7;
+  margin: 0;
+}
+
+.badge {
+  background: #f6c90e;
+  border-radius: 999px;
+  color: #101114;
+  display: inline-block;
+  font-size: 12px;
+  font-weight: 900;
+  padding: 7px 10px;
+}
+
+.favorite-button {
+  background: transparent;
+  border: 0;
+  color: #f7f7f2;
+  font-size: 32px;
+  height: 42px;
+  line-height: 1;
+  position: absolute;
+  right: 24px;
+  top: 24px;
+  width: 42px;
+  z-index: 2;
+}
+
+.favorite-button::before {
+  content: '♡';
+}
+
+.favorite-button.is-liked {
+  animation: heartPop 260ms ease-out;
+}
+
+.favorite-button.is-liked::before {
+  content: '♥';
+}
+
+@keyframes genreTick {
+  0% {
+    transform: scale(0.88) translateY(5px);
+  }
+
+  100% {
+    transform: scale(1) translateY(0);
+  }
+}
+
+@keyframes buttonPop {
+  from {
+    transform: scale(1);
+  }
+
+  to {
+    transform: scale(1.035);
+  }
+}
+
+@keyframes heartPop {
+  0% {
+    transform: scale(1);
+  }
+
+  60% {
+    transform: scale(1.18);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes winnerPulse {
+  0% {
+    transform: scale(1);
+  }
+
+  45% {
+    transform: scale(1.12);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}

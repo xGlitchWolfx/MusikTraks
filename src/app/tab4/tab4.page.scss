@@ -1,0 +1,136 @@
+ion-toolbar {
+  --background: #101114;
+  --color: #f7f7f2;
+}
+
+ion-menu-button {
+  --color: #f6c90e;
+}
+
+.profile-page {
+  --background: #0d0e11;
+}
+
+.profile-card,
+.edit-card {
+  border-radius: 26px;
+  margin: 18px;
+  padding: 18px;
+}
+
+.profile-card {
+  background: #f6c90e;
+  color: #101114;
+  text-align: center;
+}
+
+.profile-card img {
+  border-radius: 30px;
+  height: 132px;
+  object-fit: cover;
+  width: 132px;
+}
+
+.profile-card p {
+  font-size: 13px;
+  font-weight: 900;
+  margin: 14px 0 6px;
+  text-transform: uppercase;
+}
+
+.profile-card h1 {
+  font-size: 32px;
+  margin: 0;
+}
+
+.edit-card {
+  background: #1a1c22;
+  border: 1px solid #2a2d35;
+  color: #f7f7f2;
+}
+
+label,
+.field-title {
+  color: #f6c90e;
+  display: grid;
+  font-size: 13px;
+  font-weight: 900;
+  gap: 8px;
+  margin-bottom: 16px;
+  text-transform: uppercase;
+}
+
+.field-title {
+  margin: 0 0 10px;
+}
+
+.photo-actions {
+  display: grid;
+  gap: 10px;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  margin-bottom: 18px;
+}
+
+.photo-actions button,
+.file-action {
+  align-items: center;
+  background: #f6c90e;
+  border: 0;
+  border-radius: 16px;
+  color: #101114;
+  display: grid;
+  font-size: 13px;
+  font-weight: 900;
+  justify-content: center;
+  min-height: 52px;
+  padding: 10px;
+  text-align: center;
+  text-transform: none;
+}
+
+.file-action {
+  cursor: pointer;
+  margin: 0;
+}
+
+.file-action input {
+  display: none;
+}
+
+ion-input,
+ion-textarea {
+  --background: #101114;
+  --border-radius: 16px;
+  --color: #f7f7f2;
+  --padding-start: 14px;
+  border-radius: 16px;
+}
+
+.profile-actions {
+  display: grid;
+  gap: 10px;
+  grid-template-columns: 1fr 1fr;
+}
+
+.profile-actions button {
+  background: #f6c90e;
+  border: 0;
+  border-radius: 16px;
+  color: #101114;
+  font-weight: 900;
+  min-height: 52px;
+}
+
+.profile-actions .secondary-action {
+  background: #101114;
+  color: #f6c90e;
+}
+
+.profile-message {
+  background: #101114;
+  border-radius: 16px;
+  color: #f7f7f2;
+  font-weight: 700;
+  margin: 0;
+  padding: 12px;
+}

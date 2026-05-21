@@ -1,0 +1,143 @@
+ion-toolbar {
+  --background: #101114;
+  --color: #f7f7f2;
+}
+
+ion-menu-button {
+  --color: #f6c90e;
+}
+
+.favorites-page {
+  --background: #0d0e11;
+}
+
+.score-card {
+  align-items: center;
+  background: #f6c90e;
+  border-radius: 26px;
+  color: #101114;
+  display: grid;
+  gap: 16px;
+  grid-template-columns: 82px 1fr;
+  margin: 18px;
+  padding: 18px;
+}
+
+.score-card img {
+  border-radius: 22px;
+  height: 82px;
+  object-fit: cover;
+  width: 82px;
+}
+
+.score-card p {
+  font-size: 13px;
+  font-weight: 900;
+  margin: 0 0 6px;
+  text-transform: uppercase;
+}
+
+.score-card h1 {
+  font-size: 27px;
+  line-height: 1.08;
+  margin: 0;
+}
+
+.empty-card {
+  background: #1a1c22;
+  border: 1px solid #2a2d35;
+  border-radius: 24px;
+  color: #f7f7f2;
+  margin: 18px;
+  padding: 18px;
+}
+
+.empty-card h2 {
+  margin: 0 0 8px;
+}
+
+.empty-card p {
+  color: #a7a7a7;
+  margin: 0;
+}
+
+.liked-list {
+  display: grid;
+  gap: 14px;
+  padding: 0 18px 28px;
+}
+
+.liked-card {
+  align-items: center;
+  background: #1a1c22;
+  border: 1px solid #2a2d35;
+  border-radius: 24px;
+  color: #f7f7f2;
+  display: grid;
+  gap: 14px;
+  grid-template-columns: 96px 1fr 42px;
+  padding: 12px;
+}
+
+.liked-card img {
+  aspect-ratio: 1;
+  border-radius: 18px;
+  object-fit: cover;
+  width: 96px;
+}
+
+.liked-card span {
+  background: #f6c90e;
+  border-radius: 999px;
+  color: #101114;
+  display: inline-block;
+  font-size: 12px;
+  font-weight: 900;
+  padding: 6px 10px;
+}
+
+.liked-card h2 {
+  font-size: 19px;
+  margin: 8px 0 4px;
+}
+
+.liked-card p {
+  color: #a7a7a7;
+  margin: 0 0 10px;
+}
+
+.favorite-button {
+  background: transparent;
+  border: 0;
+  color: #f7f7f2;
+  font-size: 30px;
+  height: 42px;
+  line-height: 1;
+  width: 42px;
+}
+
+.favorite-button::before {
+  content: '♡';
+}
+
+.favorite-button.is-liked {
+  animation: heartPop 260ms ease-out;
+}
+
+.favorite-button.is-liked::before {
+  content: '♥';
+}
+
+@keyframes heartPop {
+  0% {
+    transform: scale(1);
+  }
+
+  60% {
+    transform: scale(1.2);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}

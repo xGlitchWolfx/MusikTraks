@@ -1,0 +1,43 @@
+<ion-menu contentId="main-content" type="overlay">
+  <ion-content class="side-menu">
+    <div class="menu-brand">
+      <img class="brand-mark" src="assets/MTIconApp.png" alt="MusicTraks" />
+      <div>
+        <h1>MusicTraks</h1>
+        <p>Juego musical</p>
+      </div>
+    </div>
+
+    <ion-list lines="none">
+      <ion-menu-toggle auto-hide="true">
+        <ion-item routerLink="/tabs/tab1" routerDirection="root" detail="false">
+          <ion-icon name="radio-outline" slot="start"></ion-icon>
+          <ion-label>TRAK</ion-label>
+        </ion-item>
+      </ion-menu-toggle>
+
+      <ion-menu-toggle auto-hide="true">
+        <ion-item routerLink="/tabs/tab2" routerDirection="root" detail="false">
+          <ion-icon name="compass-outline" slot="start"></ion-icon>
+          <ion-label>Discover</ion-label>
+        </ion-item>
+      </ion-menu-toggle>
+
+      <ion-menu-toggle auto-hide="true">
+        <ion-item routerLink="/tabs/tab3" routerDirection="root" detail="false">
+          <ion-icon name="heart-outline" slot="start"></ion-icon>
+          <ion-label>Favoritas</ion-label>
+        </ion-item>
+      </ion-menu-toggle>
+
+      <ion-menu-toggle auto-hide="true">
+        <ion-item routerLink="/tabs/tab4" routerDirection="root" detail="false">
+          <ion-icon name="person-outline" slot="start"></ion-icon>
+          <ion-label>Perfil</ion-label>
+        </ion-item>
+      </ion-menu-toggle>
+    </ion-list>
+  </ion-content>
+</ion-menu>
+
+<ion-router-outlet id="main-content"></ion-router-outlet>

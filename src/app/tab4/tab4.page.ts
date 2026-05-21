@@ -1,0 +1,140 @@
+import { Component } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
+import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
+import {
+  IonButtons,
+  IonContent,
+  IonHeader,
+  IonInput,
+  IonMenuButton,
+  IonTextarea,
+  IonTitle,
+  IonToolbar,
+} from '@ionic/angular/standalone';
+import { Profile, SupabaseService } from '../services/supabase.service';
+
+@Component({
+  selector: 'app-tab4',
+  templateUrl: 'tab4.page.html',
+  styleUrls: ['tab4.page.scss'],
+  imports: [
+    CommonModule,
+    FormsModule,
+    IonButtons,
+    IonContent,
+    IonHeader,
+    IonInput,
+    IonMenuButton,
+    IonTextarea,
+    IonTitle,
+    IonToolbar,
+  ],
+})
+export class Tab4Page {
+  username = 'Usuario MusicTraks';
+  age: number | null = null;
+  bio = 'Explorando canciones nuevas con TRAK.';
+  photoUrl = 'assets/MTIconApp.png';
+  profileMessage = '';
+  isSaving = false;
+
+  constructor(
+    private readonly router: Router,
+    private readonly supabaseService: SupabaseService
+  ) {
+    void this.loadProfile();
+  }
+
+  async takePhoto(): Promise<void> {
+    await this.pickPhoto(CameraSource.Camera);
+  }
+
+  async chooseFromGallery(): Promise<void> {
+    await this.pickPhoto(CameraSource.Photos);
+  }
+
+  chooseFromFile(event: Event): void {
+    const input = event.target as HTMLInputElement;
+    const file = input.files?.[0];
+
+    if (!file) {
+      return;
+    }
+
+    this.photoUrl = URL.createObjectURL(file);
+  }
+
+  async saveProfile(): Promise<void> {
+    this.isSaving = true;
+    this.profileMessage = '';
+
+    try {
+      const user = await this.supabaseService.getUser();
+
+      if (!user) {
+        this.router.navigateByUrl('/auth', { replaceUrl: true });
+        return;
+      }
+
+      await this.supabaseService.upsertProfile({
+        id: user.id,
+        username: this.username,
+        age: this.age,
+        bio: this.bio,
+        avatar_url: this.photoUrl,
+      });
+
+      this.profileMessage = 'Perfil guardado.';
+    } catch (error) {
+      this.profileMessage = error instanceof Error ? error.message : 'No se pudo guardar el perfil.';
+    } finally {
+      this.isSaving = false;
+    }
+  }
+
+  async signOut(): Promise<void> {
+    await this.supabaseService.signOut();
+    this.router.navigateByUrl('/auth', { replaceUrl: true });
+  }
+
+  private async pickPhoto(source: CameraSource): Promise<void> {
+    try {
+      const image = await Camera.getPhoto({
+        quality: 80,
+        resultType: CameraResultType.DataUrl,
+        source,
+      });
+
+      if (image.dataUrl) {
+        this.photoUrl = image.dataUrl;
+      }
+    } catch {
+      // The user can cancel the camera/gallery picker.
+    }
+  }
+
+  private async loadProfile(): Promise<void> {
+    try {
+      const user = await this.supabaseService.getUser();
+
+      if (!user) {
+        return;
+      }
+
+      const profile: Profile | null = await this.supabaseService.getProfile(user.id);
+
+      if (!profile) {
+        return;
+      }
+
+      this.username = profile.username || this.username;
+      this.age = profile.age;
+      this.bio = profile.bio || this.bio;
+      this.photoUrl = profile.avatar_url || this.photoUrl;
+    } catch {
+      this.profileMessage = 'No se pudo cargar el perfil.';
+    }
+  }
+}

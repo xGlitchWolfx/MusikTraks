@@ -1,0 +1,90 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Discover</ion-title>
+    <img slot="end" class="toolbar-logo" src="assets/Ico.png" alt="MusicTraks" />
+  </ion-toolbar>
+</ion-header>
+
+<ion-content fullscreen class="discover-page">
+  <section class="discover-hero">
+    <p>Explora por tags</p>
+    <h1>Busca musica por nombre o entra por genero.</h1>
+  </section>
+
+  <ion-searchbar
+    placeholder="Buscar cancion, artista o tag"
+    [value]="query"
+    (ionInput)="updateQuery($event)"
+  ></ion-searchbar>
+
+  <section class="genre-panel">
+    <div class="section-heading">
+      <h2>Generos populares</h2>
+      <span>{{ selectedTag }}</span>
+    </div>
+
+    <div class="genre-grid">
+      <button type="button" *ngFor="let tag of genreTags" (click)="searchByTag(tag)">
+        {{ tag.name }}
+      </button>
+    </div>
+  </section>
+
+  <section class="results-list">
+    <article class="status-card" *ngIf="isLoading">
+      <h2>Buscando</h2>
+      <p>Trayendo canciones desde Deezer.</p>
+    </article>
+
+    <article class="status-card" *ngIf="loadError">
+      <h2>No cargo Deezer</h2>
+      <p>{{ loadError }}</p>
+    </article>
+
+    <article class="result-card" *ngFor="let track of tagTracks">
+      <button
+        class="favorite-button"
+        type="button"
+        [class.is-liked]="favoritesService.isFavorite(track)"
+        (click)="toggleFavorite(track)"
+        aria-label="Guardar en favoritas"
+      ></button>
+      <img [src]="track.cover" [alt]="track.title" />
+      <div class="result-copy">
+        <span>Deezer preview</span>
+        <h2>{{ track.title }}</h2>
+        <p>{{ track.artist }}</p>
+        <app-track-player [previewUrl]="track.preview"></app-track-player>
+      </div>
+    </article>
+  </section>
+
+  <section class="track-section" *ngFor="let section of sections">
+    <div class="section-heading">
+      <h2>{{ section.title }}</h2>
+      <span>{{ section.label }}</span>
+    </div>
+
+    <div class="track-row">
+      <article class="track-card" *ngFor="let track of section.tracks">
+        <button
+          class="favorite-button"
+          type="button"
+          [class.is-liked]="favoritesService.isFavorite(track)"
+          (click)="toggleFavorite(track)"
+          aria-label="Guardar en favoritas"
+        ></button>
+        <img [src]="track.cover" [alt]="track.title" />
+        <div class="track-info">
+          <span class="badge">{{ track.duration }}</span>
+          <h3>{{ track.title }}</h3>
+          <p>{{ track.artist }}</p>
+        </div>
+        <app-track-player [previewUrl]="track.preview"></app-track-player>
+      </article>
+    </div>
+  </section>
+</ion-content>

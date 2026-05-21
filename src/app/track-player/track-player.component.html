@@ -1,0 +1,22 @@
+<div class="player" *ngIf="state$ | async as state">
+  <button class="play-button" type="button" (click)="toggle()">
+    <span *ngIf="!isPlaying(state)"></span>
+    <i *ngIf="isPlaying(state)"></i>
+  </button>
+
+  <div class="timeline">
+    <div class="time-row">
+      <strong>{{ getTime(state) }}</strong>
+      <span>{{ getDuration(state) }}</span>
+    </div>
+
+    <input
+      type="range"
+      min="0"
+      max="100"
+      [value]="getProgress(state)"
+      (input)="seek($event)"
+      aria-label="Progreso de audio"
+    />
+  </div>
+</div>

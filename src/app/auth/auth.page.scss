@@ -1,0 +1,97 @@
+.auth-page {
+  --background: #f6c90e;
+}
+
+.auth-shell {
+  display: grid;
+  gap: 18px;
+  min-height: 100%;
+  padding: 30px 22px;
+  place-content: center;
+}
+
+.auth-shell img {
+  border-radius: 28px;
+  height: 118px;
+  justify-self: center;
+  object-fit: cover;
+  width: 118px;
+}
+
+.auth-shell h1 {
+  color: #101114;
+  font-size: 44px;
+  line-height: 1;
+  margin: 0;
+  text-align: center;
+}
+
+.mode-switch {
+  background: #101114;
+  border-radius: 20px;
+  display: grid;
+  gap: 8px;
+  grid-template-columns: 1fr 1fr;
+  padding: 8px;
+}
+
+.mode-switch button,
+.submit-button {
+  border: 0;
+  border-radius: 16px;
+  font-weight: 900;
+  min-height: 52px;
+}
+
+.mode-switch button {
+  background: transparent;
+  color: #f7f7f2;
+}
+
+.mode-switch .active {
+  background: #f6c90e;
+  color: #101114;
+}
+
+form {
+  background: #101114;
+  border-radius: 26px;
+  display: grid;
+  gap: 16px;
+  padding: 18px;
+}
+
+label {
+  color: #f6c90e;
+  display: grid;
+  font-size: 13px;
+  font-weight: 900;
+  gap: 8px;
+  text-transform: uppercase;
+}
+
+input {
+  background: #172033;
+  border: 0;
+  border-radius: 16px;
+  color: #f7f7f2;
+  font-size: 16px;
+  font-weight: 800;
+  min-height: 52px;
+  outline: none;
+  padding: 0 14px;
+}
+
+.submit-button {
+  background: #f6c90e;
+  color: #101114;
+}
+
+.auth-message {
+  background: #172033;
+  border-radius: 16px;
+  color: #f7f7f2;
+  font-weight: 700;
+  margin: 0;
+  padding: 12px;
+}

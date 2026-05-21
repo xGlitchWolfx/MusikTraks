@@ -1,0 +1,60 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>TRAK</ion-title>
+    <img slot="end" class="toolbar-logo" src="assets/Ico.png" alt="MusicTraks" />
+  </ion-toolbar>
+</ion-header>
+
+<ion-content fullscreen class="trak-page">
+  <section class="trak-hero">
+    <img src="assets/MTIconApp.png" alt="MusicTraks" />
+    <p>MusicTraks roulette</p>
+    <h1>Es hora de TRAK!</h1>
+    <button type="button" (click)="rollTrack()" [class.is-rolling]="isRolling">
+      {{ isRolling ? 'Girando...' : 'Tirar ruleta' }}
+    </button>
+  </section>
+
+  <section
+    class="roulette-card"
+    [class.is-rolling]="isRolling"
+    [class.has-winner]="winnerGenre && !isRolling"
+  >
+    <div class="center-marker"></div>
+    <div class="roulette-window">
+      <span
+        *ngFor="let genre of visibleGenres; let index = index"
+        [class.is-center]="index === 1"
+        [class.is-winner]="winnerGenre?.name === genre.name && index === 1 && !isRolling"
+      >
+        {{ genre.name }}
+      </span>
+    </div>
+  </section>
+
+  <section class="state-card" *ngIf="rollError">
+    <h2>No salio TRAK</h2>
+    <p>{{ rollError }}</p>
+  </section>
+
+  <section class="result-card" *ngIf="randomTrack as track">
+    <button
+      class="favorite-button"
+      type="button"
+      [class.is-liked]="favoritesService.isFavorite(track)"
+      (click)="toggleFavorite(track)"
+      aria-label="Guardar en favoritas"
+    ></button>
+
+    <img [src]="track.cover" [alt]="track.title" />
+    <div>
+      <span class="badge">{{ winnerGenre?.name || 'Cancion aleatoria' }}</span>
+      <h2>{{ track.title }}</h2>
+      <p>{{ track.artist }} · {{ track.album }}</p>
+    </div>
+    <app-track-player [previewUrl]="track.preview"></app-track-player>
+  </section>
+</ion-content>

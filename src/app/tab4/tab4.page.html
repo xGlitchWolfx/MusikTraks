@@ -1,0 +1,53 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Perfil</ion-title>
+    <img slot="end" class="toolbar-logo" src="assets/Ico.png" alt="MusicTraks" />
+  </ion-toolbar>
+</ion-header>
+
+<ion-content fullscreen class="profile-page">
+  <section class="profile-card">
+    <img [src]="photoUrl" alt="Foto de perfil" />
+    <p>Perfil MusicTraks</p>
+    <h1>{{ username }}</h1>
+  </section>
+
+  <section class="edit-card">
+    <p class="field-title">Foto</p>
+    <div class="photo-actions">
+      <button type="button" (click)="takePhoto()">Tomar foto</button>
+      <button type="button" (click)="chooseFromGallery()">Galeria</button>
+      <label class="file-action">
+        Archivo PC
+        <input type="file" accept="image/*" (change)="chooseFromFile($event)" />
+      </label>
+    </div>
+
+    <label>
+      Nombre de usuario
+      <ion-input [(ngModel)]="username" placeholder="Tu nombre"></ion-input>
+    </label>
+
+    <label>
+      Edad
+      <ion-input type="number" [(ngModel)]="age" placeholder="Tu edad"></ion-input>
+    </label>
+
+    <label>
+      Bio
+      <ion-textarea [(ngModel)]="bio" placeholder="Algo sobre tu musica"></ion-textarea>
+    </label>
+
+    <p class="profile-message" *ngIf="profileMessage">{{ profileMessage }}</p>
+
+    <div class="profile-actions">
+      <button type="button" (click)="saveProfile()" [disabled]="isSaving">
+        {{ isSaving ? 'Guardando...' : 'Guardar perfil' }}
+      </button>
+      <button type="button" class="secondary-action" (click)="signOut()">Salir</button>
+    </div>
+  </section>
+</ion-content>

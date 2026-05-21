@@ -1,0 +1,7 @@
+{
+  "name": "MusicTraks",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular-standalone"
+}

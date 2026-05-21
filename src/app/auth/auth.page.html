@@ -1,0 +1,44 @@
+<ion-content fullscreen class="auth-page">
+  <main class="auth-shell">
+    <img src="assets/MTIconApp.png" alt="MusicTraks" />
+    <h1>{{ mode === 'login' ? 'Login' : 'Registro' }}</h1>
+
+    <div class="mode-switch">
+      <button type="button" [class.active]="mode === 'login'" (click)="switchMode('login')">
+        Login
+      </button>
+      <button type="button" [class.active]="mode === 'register'" (click)="switchMode('register')">
+        Register
+      </button>
+    </div>
+
+    <form (ngSubmit)="submit()">
+      <label *ngIf="mode === 'register'">
+        Usuario
+        <input type="text" name="username" [(ngModel)]="username" autocomplete="nickname" />
+      </label>
+
+      <label>
+        Email
+        <input type="email" name="email" [(ngModel)]="email" autocomplete="email" required />
+      </label>
+
+      <label>
+        Password
+        <input
+          type="password"
+          name="password"
+          [(ngModel)]="password"
+          autocomplete="current-password"
+          required
+        />
+      </label>
+
+      <p class="auth-message" *ngIf="authMessage">{{ authMessage }}</p>
+
+      <button class="submit-button" type="submit" [disabled]="isLoading">
+        {{ isLoading ? 'Conectando...' : mode === 'login' ? 'Entrar' : 'Crear cuenta' }}
+      </button>
+    </form>
+  </main>
+</ion-content>

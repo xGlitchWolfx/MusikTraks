@@ -1,0 +1,49 @@
+.side-menu {
+  --background: #111216;
+  color: #f7f7f2;
+}
+
+.menu-brand {
+  align-items: center;
+  display: flex;
+  gap: 14px;
+  padding: 28px 18px 18px;
+}
+
+.brand-mark {
+  background: #f6c90e;
+  border-radius: 18px;
+  height: 58px;
+  object-fit: cover;
+  padding: 6px;
+  width: 58px;
+}
+
+.menu-brand h1 {
+  font-size: 20px;
+  margin: 0;
+}
+
+.menu-brand p {
+  color: #a7a7a7;
+  font-size: 13px;
+  margin: 4px 0 0;
+}
+
+ion-list {
+  background: transparent;
+  padding: 8px 12px;
+}
+
+ion-item {
+  --background: #1d1f25;
+  --border-radius: 16px;
+  --color: #f7f7f2;
+  --inner-padding-end: 14px;
+  --min-height: 56px;
+  margin-bottom: 10px;
+}
+
+ion-icon {
+  color: #f6c90e;
+}

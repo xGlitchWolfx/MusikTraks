@@ -1,0 +1,44 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Favoritas</ion-title>
+    <img slot="end" class="toolbar-logo" src="assets/Ico.png" alt="MusicTraks" />
+  </ion-toolbar>
+</ion-header>
+
+<ion-content fullscreen class="favorites-page">
+  <section class="score-card">
+    <img src="assets/MTIconApp.png" alt="MusicTraks" />
+    <div>
+      <p>Favoritas</p>
+      <h1>Canciones que marcaste con me gusta</h1>
+    </div>
+  </section>
+
+  <ng-container *ngIf="favorites$ | async as favorites">
+    <section class="empty-card" *ngIf="!favorites.length">
+      <h2>Aun no hay favoritas</h2>
+      <p>Ve a Discover o TRAK y toca el corazon de una cancion.</p>
+    </section>
+
+    <section class="liked-list" *ngIf="favorites.length">
+      <article class="liked-card" *ngFor="let song of favorites; let index = index">
+        <img [src]="song.cover" [alt]="song.title" />
+        <div>
+          <span>{{ index + 1 }}</span>
+          <h2>{{ song.title }}</h2>
+          <p>{{ song.artist }}</p>
+          <app-track-player [previewUrl]="song.preview"></app-track-player>
+        </div>
+        <button
+          class="favorite-button is-liked"
+          type="button"
+          (click)="removeFavorite(song)"
+          aria-label="Quitar de favoritas"
+        ></button>
+      </article>
+    </section>
+  </ng-container>
+</ion-content>
