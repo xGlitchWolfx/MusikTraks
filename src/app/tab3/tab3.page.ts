@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {
   IonButtons,
@@ -11,6 +11,7 @@ import {
 import { Observable } from 'rxjs';
 import { MusicTrack } from '../services/deezer.service';
 import { FavoritesService } from '../services/favorites.service';
+import { ProfileStateService } from '../services/profile-state.service';
 import { TrackPlayerComponent } from '../track-player/track-player.component';
 
 @Component({
@@ -29,6 +30,7 @@ import { TrackPlayerComponent } from '../track-player/track-player.component';
   ],
 })
 export class Tab3Page {
+  readonly avatar$ = inject(ProfileStateService).avatar$;
   readonly favorites$: Observable<MusicTrack[]> = this.favoritesService.favorites$;
 
   constructor(public readonly favoritesService: FavoritesService) {}

@@ -123,15 +123,15 @@ export class AuthPage {
 
   private get registerValidationMessage(): string {
     if (!this.hasMinimumLength) {
-      return 'La contrasena debe tener al menos 6 caracteres.';
+      return 'La contraseña debe tener al menos 6 caracteres.';
     }
 
     if (!this.hasNumber) {
-      return 'La contrasena debe incluir al menos un numero.';
+      return 'La contraseña debe incluir al menos un número.';
     }
 
     if (!this.passwordsMatch) {
-      return 'Las contrasenas no coinciden.';
+      return 'Las contraseñas no coinciden.';
     }
 
     return 'Completa los requisitos para crear tu cuenta.';
@@ -146,7 +146,7 @@ export class AuthPage {
     }
 
     if (status === 403 || message.toLowerCase().includes('invalid')) {
-      return 'Tu sesion anterior ya no es valida. Inicia sesion otra vez.';
+      return 'Tu sesión anterior ya no es válida. Inicia sesión otra vez.';
     }
 
     return message || 'No se pudo conectar con Supabase.';

@@ -16,6 +16,7 @@ import {
 } from '@ionic/angular/standalone';
 
 import { Profile, SupabaseService } from '../services/supabase.service';
+import { ProfileStateService } from '../services/profile-state.service';
 
 @Component({
   selector: 'app-tab4',
@@ -52,7 +53,8 @@ export class Tab4Page {
 
   constructor(
     private readonly router: Router,
-    private readonly supabaseService: SupabaseService
+    private readonly supabaseService: SupabaseService,
+    private readonly profileState: ProfileStateService
   ) {
     void this.loadProfile();
   }
@@ -66,9 +68,7 @@ export class Tab4Page {
   }
 
   chooseFromFile(event: Event): void {
-
     const input = event.target as HTMLInputElement;
-
     const file = input.files?.[0];
 
     if (!file) {
@@ -76,8 +76,8 @@ export class Tab4Page {
     }
 
     this.selectedFile = file;
-
     this.photoUrl = URL.createObjectURL(file);
+    this.profileState.setAvatar(this.photoUrl);
   }
 
   async saveProfile(): Promise<void> {
@@ -101,12 +101,12 @@ export class Tab4Page {
 
       // Subir avatar a Supabase Storage
       if (this.selectedFile) {
-
         this.photoUrl =
           await this.supabaseService.uploadAvatar(
             this.selectedFile,
             user.id
           );
+        this.profileState.setAvatar(this.photoUrl);
       }
 
       // Guardar perfil
@@ -121,7 +121,7 @@ export class Tab4Page {
       // Recargar perfil
       await this.loadProfile();
 
-      this.profileMessage = 'Perfil Actualizado!';
+      this.profileMessage = 'Perfil actualizado.';
 
     } catch (error) {
 
@@ -145,46 +145,42 @@ export class Tab4Page {
     });
   }
 
-private async pickPhoto(
-  source: CameraSource
-): Promise<void> {
+  private async pickPhoto(
+    source: CameraSource
+  ): Promise<void> {
 
-  try {
+    try {
 
-    const image = await Camera.getPhoto({
-      quality: 80,
-      resultType: CameraResultType.Uri,
-      source,
-    });
+      const image = await Camera.getPhoto({
+        quality: 80,
+        resultType: CameraResultType.Uri,
+        source,
+      });
 
-    if (!image.webPath) {
-      return;
-    }
-
-    // preview temporal
-    this.photoUrl = image.webPath;
-
-    // obtener blob real
-    const response = await fetch(image.webPath);
-
-    const blob = await response.blob();
-
-    console.log(blob);
-
-    // crear archivo real
-    this.selectedFile = new File(
-      [blob],
-      'avatar.jpg',
-      {
-        type: 'image/jpeg'
+      if (!image.webPath) {
+        return;
       }
-    );
 
-  } catch (error) {
+      // Preview temporal antes de subir el archivo.
+      this.photoUrl = image.webPath;
+      this.profileState.setAvatar(this.photoUrl);
 
-    console.error(error);
+      const response = await fetch(image.webPath);
+      const blob = await response.blob();
+
+      this.selectedFile = new File(
+        [blob],
+        'avatar.jpg',
+        {
+          type: 'image/jpeg'
+        }
+      );
+
+    } catch (error) {
+
+      console.error(error);
+    }
   }
-}
 
   private async loadProfile(): Promise<void> {
 
@@ -209,6 +205,8 @@ private async pickPhoto(
 
       this.photoUrl =
         profile.avatar_url || this.photoUrl;
+
+      this.profileState.setAvatar(this.photoUrl);
 
     } catch {
 

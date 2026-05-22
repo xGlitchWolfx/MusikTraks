@@ -14,7 +14,8 @@ ion-menu-button {
 .play-hero,
 .play-card,
 .play-message {
-  margin: 18px;
+  margin: 18px auto;
+  max-width: min(720px, calc(100% - 36px));
 }
 
 .play-hero {
@@ -23,8 +24,8 @@ ion-menu-button {
   color: #101114;
   display: grid;
   gap: 12px;
+  grid-template-columns: 1fr;
   padding: 22px;
-  text-align: center;
 }
 
 .play-hero p,
@@ -69,6 +70,18 @@ ion-menu-button {
   padding: 16px;
 }
 
+.card-heading {
+  align-items: center;
+  display: grid;
+  gap: 12px;
+  grid-template-columns: minmax(0, 1fr) auto;
+}
+
+.card-heading h2 {
+  font-size: 21px;
+  margin: 6px 0 0;
+}
+
 .effect-grid {
   display: grid;
   gap: 10px;
@@ -91,12 +104,26 @@ ion-menu-button {
 }
 
 .empty-card {
+  color: #f7f7f2;
   min-height: 180px;
+  place-content: center;
+  text-align: center;
+}
+
+.empty-card h2 {
+  margin: 0;
+}
+
+.empty-card p {
+  color: #a7a7a7;
+  margin: 0;
 }
 
 .delete-button {
   background: #ef4444;
   color: #f7f7f2;
+  min-height: 44px;
+  padding: 0 12px;
 }
 
 .play-message {

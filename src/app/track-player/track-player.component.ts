@@ -45,7 +45,7 @@ export class TrackPlayerComponent {
   }
 
   toggle(): void {
-    this.audioPlayer.toggle(this.previewUrl);
+    void this.audioPlayer.toggle(this.previewUrl);
   }
 
   seek(event: Event): void {

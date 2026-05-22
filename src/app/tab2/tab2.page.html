@@ -4,36 +4,54 @@
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
     <ion-title>Discover</ion-title>
-    <img slot="end" class="toolbar-logo" src="assets/Ico.png" alt="MusicTraks" />
+    <img slot="end" class="toolbar-logo" [src]="(avatar$ | async) || 'assets/MTIconApp.png'" alt="MusicTraks" />
   </ion-toolbar>
 </ion-header>
 
 <ion-content fullscreen class="discover-page">
   <section class="discover-hero">
-    <p>Explora por tags</p>
-    <h1>Busca musica por nombre o entra por genero.</h1>
-  </section>
+    <div>
+      <p>Discover</p>
+      <h1>Encuentra tu proximo track.</h1>
+    </div>
 
-  <ion-searchbar
-    placeholder="Buscar cancion, artista o tag"
-    [value]="query"
-    (ionInput)="updateQuery($event)"
-  ></ion-searchbar>
+    <ion-searchbar
+      placeholder="Buscar canción, artista o tag"
+      [value]="query"
+      (ionInput)="updateQuery($event)"
+    ></ion-searchbar>
+  </section>
 
   <section class="genre-panel">
     <div class="section-heading">
-      <h2>Generos populares</h2>
+      <div>
+        <p>Tags</p>
+        <h2>Géneros populares</h2>
+      </div>
       <span>{{ selectedTag }}</span>
     </div>
 
-    <div class="genre-grid">
-      <button type="button" *ngFor="let tag of genreTags" (click)="searchByTag(tag)">
+    <div class="genre-strip">
+      <button
+        type="button"
+        *ngFor="let tag of genreTags"
+        [class.active]="selectedTag === tag.name"
+        (click)="searchByTag(tag)"
+      >
         {{ tag.name }}
       </button>
     </div>
   </section>
 
-  <section class="results-list">
+  <section class="focus-panel">
+    <div class="section-heading">
+      <div>
+        <p>Seleccion actual</p>
+        <h2>{{ selectedTag }}</h2>
+      </div>
+      <span>{{ tagTracks.length || 0 }} tracks</span>
+    </div>
+
     <article class="status-card" *ngIf="isLoading">
       <h2>Buscando</h2>
       <p>Trayendo canciones desde Deezer.</p>
@@ -44,27 +62,32 @@
       <p>{{ loadError }}</p>
     </article>
 
-    <article class="result-card" *ngFor="let track of tagTracks">
-      <button
-        class="favorite-button"
-        type="button"
-        [class.is-liked]="favoritesService.isFavorite(track)"
-        (click)="toggleFavorite(track)"
-        aria-label="Guardar en favoritas"
-      ></button>
-      <img [src]="track.cover" [alt]="track.title" />
-      <div class="result-copy">
-        <span>Deezer preview</span>
-        <h2>{{ track.title }}</h2>
-        <p>{{ track.artist }}</p>
-        <app-track-player [previewUrl]="track.preview"></app-track-player>
-      </div>
-    </article>
+    <div class="results-list">
+      <article class="result-card" *ngFor="let track of tagTracks; let index = index">
+        <span class="rank">{{ index + 1 }}</span>
+        <img [src]="track.cover" [alt]="track.title" />
+        <div class="result-copy">
+          <h2>{{ track.title }}</h2>
+          <p>{{ track.artist }} · {{ track.album }}</p>
+          <app-track-player [previewUrl]="track.preview"></app-track-player>
+        </div>
+        <button
+          class="favorite-button"
+          type="button"
+          [class.is-liked]="favoritesService.isFavorite(track)"
+          (click)="toggleFavorite(track)"
+          aria-label="Guardar en favoritas"
+        ></button>
+      </article>
+    </div>
   </section>
 
   <section class="track-section" *ngFor="let section of sections">
     <div class="section-heading">
-      <h2>{{ section.title }}</h2>
+      <div>
+        <p>Playlist</p>
+        <h2>{{ section.title }}</h2>
+      </div>
       <span>{{ section.label }}</span>
     </div>
 

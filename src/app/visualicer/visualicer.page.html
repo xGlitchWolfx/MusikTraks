@@ -4,7 +4,7 @@
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
     <ion-title>Visualicer</ion-title>
-    <img slot="end" class="toolbar-logo" src="assets/Ico.png" alt="MusicTraks" />
+    <img slot="end" class="toolbar-logo" [src]="(avatar$ | async) || 'assets/MTIconApp.png'" alt="MusicTraks" />
   </ion-toolbar>
 </ion-header>
 
@@ -31,8 +31,9 @@
       <app-track-player *ngIf="musicUrl" [previewUrl]="musicUrl"></app-track-player>
 
       <div class="empty-audio" *ngIf="!musicUrl">
-        <p>Si ya subiste una musica en PLAY se carga automaticamente aqui.</p>
-        <button type="button" (click)="openPicker()">Subir musica</button>
+        <h2>No hay fuente activa</h2>
+        <p>Si ya subiste una música en PLAY se carga automáticamente aquí.</p>
+        <button type="button" (click)="openPicker()">Subir música</button>
       </div>
     </div>
 
@@ -53,7 +54,7 @@
     <section class="change-popup" (click)="$event.stopPropagation()">
       <h2>Cambiar fuente</h2>
       <p *ngIf="musicUrl">{{ musicName }}</p>
-      <button type="button" (click)="openPicker()">Subir nueva musica</button>
+      <button type="button" (click)="openPicker()">Subir nueva música</button>
       <button type="button" class="youtube-button" (click)="useYoutubeMode()">URL de YouTube</button>
       <button type="button" class="delete-button" *ngIf="musicUrl" (click)="deleteMusic()" [disabled]="isBusy">
         Eliminar

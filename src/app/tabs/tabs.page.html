@@ -1,7 +1,7 @@
 <ion-menu contentId="main-content" type="overlay">
   <ion-content class="side-menu">
     <div class="menu-brand">
-      <img class="brand-mark" src="assets/MTIconApp.png" alt="MusicTraks" />
+      <img class="brand-mark" [src]="(avatar$ | async) || 'assets/MTIconApp.png'" alt="MusicTraks" />
       <div>
         <h1>MusicTraks</h1>
         <p>Juego musical</p>

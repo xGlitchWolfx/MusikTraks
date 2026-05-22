@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, ElementRef, OnDestroy, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnDestroy, ViewChild, inject } from '@angular/core';
 import {
   IonButtons,
   IonContent,
@@ -10,6 +10,7 @@ import {
 } from '@ionic/angular/standalone';
 import { Router } from '@angular/router';
 import { AudioPlayerService, PlayerEffect } from '../services/audio-player.service';
+import { ProfileStateService } from '../services/profile-state.service';
 import { SupabaseService } from '../services/supabase.service';
 import { TrackPlayerComponent } from '../track-player/track-player.component';
 
@@ -31,6 +32,8 @@ type AudioEffect = PlayerEffect;
   ],
 })
 export class PlayPage implements OnDestroy {
+  readonly avatar$ = inject(ProfileStateService).avatar$;
+
   @ViewChild('fileInput') fileInput?: ElementRef<HTMLInputElement>;
 
   musicUrl = '';
@@ -105,10 +108,10 @@ export class PlayPage implements OnDestroy {
         this.saveCachedMusic(this.musicUrl, this.musicName);
         this.playMessage = 'Musica subida. Ya puedes jugar con efectos.';
       } catch {
-        this.playMessage = 'Storage no permitio guardar esta musica. Puedes jugarla localmente por ahora.';
+        this.playMessage = 'Storage no permitió guardar esta música. Puedes jugarla localmente por ahora.';
       }
     } catch (error) {
-      this.playMessage = error instanceof Error ? error.message : 'No se pudo subir la musica.';
+      this.playMessage = error instanceof Error ? error.message : 'No se pudo subir la música.';
     } finally {
       this.isBusy = false;
       input.value = '';
@@ -139,10 +142,10 @@ export class PlayPage implements OnDestroy {
       this.clearCachedMusic();
       this.selectedEffect = 'normal';
       this.resetSharedPlayerEffect();
-      this.playMessage = 'Sube una musica';
+      this.playMessage = 'Sube una música';
       window.setTimeout(() => this.openPicker(), 250);
     } catch (error) {
-      this.playMessage = error instanceof Error ? error.message : 'No se pudo borrar la musica.';
+      this.playMessage = error instanceof Error ? error.message : 'No se pudo borrar la música.';
     } finally {
       this.isBusy = false;
     }
@@ -160,10 +163,10 @@ export class PlayPage implements OnDestroy {
       const cachedMusic = this.getCachedMusic();
       this.musicUrl = profile?.music || cachedMusic.url;
       this.musicName = this.musicUrl ? cachedMusic.name || 'Musica subida en PLAY' : '';
-      this.playMessage = this.musicUrl ? '' : 'Sube una musica';
+      this.playMessage = this.musicUrl ? '' : 'Sube una música';
       this.applySelectedEffect();
     } catch {
-      this.playMessage = 'No se pudo cargar tu musica.';
+      this.playMessage = 'No se pudo cargar tu música.';
     }
   }
 

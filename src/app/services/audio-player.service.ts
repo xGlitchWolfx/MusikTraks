@@ -115,10 +115,12 @@ export class AudioPlayerService {
     this.analyser.connect(this.audioContext.destination);
   }
 
-  toggle(url: string): void {
+  async toggle(url: string): Promise<void> {
+    await this.applyEffect('normal');
+
     if (this.stateSubject.value.currentUrl === url) {
       if (this.audio.paused) {
-        void this.audio.play();
+        await this.audio.play();
       } else {
         this.audio.pause();
       }
@@ -136,7 +138,7 @@ export class AudioPlayerService {
       duration: 0,
       isPlaying: true,
     });
-    void this.audio.play();
+    await this.audio.play();
   }
 
   seek(url: string, percent: number): void {

@@ -4,27 +4,33 @@
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
     <ion-title>PLAY</ion-title>
-    <img slot="end" class="toolbar-logo" src="assets/Ico.png" alt="MusicTraks" />
+    <img slot="end" class="toolbar-logo" [src]="(avatar$ | async) || 'assets/MTIconApp.png'" alt="MusicTraks" />
   </ion-toolbar>
 </ion-header>
 
 <ion-content fullscreen class="play-page">
   <section class="play-hero">
-    <p>Laboratorio musical</p>
-    <h1>Sube una musica y juega con efectos</h1>
+    <div>
+      <p>Laboratorio musical</p>
+      <h1>Haz pensado en jugar con tu musica favorita? subela y prueba divertidos efectos</h1>
+    </div>
     <button type="button" (click)="openPicker()" [disabled]="isBusy">
-      {{ musicUrl ? 'Cambiar musica' : 'Sube una musica' }}
+      {{ musicUrl ? 'Cambiar música' : 'Sube una música' }}
     </button>
     <input #fileInput type="file" accept="audio/*" (change)="chooseMusic($event)" />
   </section>
 
   <section class="play-card" *ngIf="musicUrl; else emptyState">
-    <p class="field-title">{{ musicName }}</p>
+    <div class="card-heading">
+      <div>
+        <p class="field-title">Ahora en PLAY</p>
+        <h2>{{ musicName }}</h2>
+      </div>
+      <button class="delete-button" type="button" (click)="deleteMusic()" [disabled]="isBusy">
+        Borrar
+      </button>
+    </div>
     <app-track-player [previewUrl]="musicUrl"></app-track-player>
-
-    <button class="delete-button" type="button" (click)="deleteMusic()" [disabled]="isBusy">
-      Borrar musica
-    </button>
   </section>
 
   <section class="play-card effects-card" *ngIf="musicUrl">
@@ -46,7 +52,10 @@
   </section>
 
   <ng-template #emptyState>
-    <section class="play-card empty-card"></section>
+    <section class="play-card empty-card">
+      <h2>No hay música cargada</h2>
+      <p>No detecto alguna musica chevere por aqui</p>
+    </section>
   </ng-template>
 
   <p class="play-message" *ngIf="playMessage">{{ playMessage }}</p>

@@ -22,6 +22,8 @@ canvas {
 
 .visual-content {
   min-height: 100%;
+  margin: 0 auto;
+  max-width: 860px;
   padding: 18px;
   position: relative;
   z-index: 1;
@@ -63,6 +65,7 @@ iframe {
 
 .visual-card {
   backdrop-filter: blur(8px);
+  margin-top: 18px;
 }
 
 .visual-heading {
@@ -127,6 +130,12 @@ input[type='url'] {
 .empty-audio {
   display: grid;
   gap: 12px;
+  text-align: center;
+}
+
+.empty-audio h2 {
+  color: #f7f7f2;
+  margin: 0;
 }
 
 .change-backdrop {

@@ -14,21 +14,25 @@ ion-menu-button {
 .profile-card,
 .edit-card {
   border-radius: 26px;
-  margin: 18px;
+  margin: 18px auto;
+  max-width: min(720px, calc(100% - 36px));
   padding: 18px;
 }
 
 .profile-card {
+  align-items: center;
   background: #f6c90e;
   color: #101114;
-  text-align: center;
+  display: grid;
+  gap: 16px;
+  grid-template-columns: 118px 1fr;
 }
 
 .profile-card img {
-  border-radius: 30px;
-  height: 132px;
+  border-radius: 28px;
+  height: 118px;
   object-fit: cover;
-  width: 132px;
+  width: 118px;
 }
 
 .profile-card p {
@@ -43,10 +47,41 @@ ion-menu-button {
   margin: 0;
 }
 
+.profile-card span {
+  color: #3a3210;
+  display: block;
+  font-weight: 900;
+  margin-top: 8px;
+}
+
 .edit-card {
   background: #1a1c22;
   border: 1px solid #2a2d35;
   color: #f7f7f2;
+  display: grid;
+  gap: 16px;
+}
+
+.form-heading {
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+}
+
+.form-heading p {
+  color: #f6c90e;
+  font-size: 13px;
+  font-weight: 900;
+  margin: 0;
+  text-transform: uppercase;
+}
+
+.form-heading strong {
+  background: #101114;
+  border-radius: 999px;
+  color: #f7f7f2;
+  font-size: 12px;
+  padding: 8px 10px;
 }
 
 label,
@@ -68,7 +103,6 @@ label,
   display: grid;
   gap: 10px;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  margin-bottom: 18px;
 }
 
 .photo-actions button,

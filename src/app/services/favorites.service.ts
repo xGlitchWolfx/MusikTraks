@@ -37,7 +37,17 @@ export class FavoritesService {
     }
 
     try {
-      return JSON.parse(storedFavorites) as MusicTrack[];
+      return (JSON.parse(storedFavorites) as Array<Partial<MusicTrack> & Record<string, unknown>>)
+        .map((favorite) => ({
+          id: Number(favorite.id),
+          title: String(favorite.title ?? ''),
+          artist: String(favorite.artist ?? ''),
+          album: String(favorite.album ?? ''),
+          duration: String(favorite.duration ?? '0:30'),
+          cover: String(favorite.cover ?? favorite['cover_url'] ?? ''),
+          preview: String(favorite.preview ?? favorite['preview_url'] ?? favorite['audio_url'] ?? ''),
+        }))
+        .filter((favorite) => Boolean(favorite.id && favorite.title && favorite.preview));
     } catch {
       return [];
     }

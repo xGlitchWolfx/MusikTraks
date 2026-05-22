@@ -4,17 +4,17 @@
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
     <ion-title>TRAK</ion-title>
-    <img slot="end" class="toolbar-logo" src="assets/Ico.png" alt="MusicTraks" />
+    <img slot="end" class="toolbar-logo" [src]="(avatar$ | async) || 'assets/MTIconApp.png'" alt="MusicTraks" />
   </ion-toolbar>
 </ion-header>
 
 <ion-content fullscreen class="trak-page">
   <section class="trak-hero">
     <img src="assets/MTIconApp.png" alt="MusicTraks" />
-    <p>Ruleta de hits conocidos</p>
-    <h1>Que salga una que todos topen</h1>
+    <p>Ruleta TRAK</p>
+    <h1>Tira de la ruleta! y si sabes la cancion estas a salvo y si no vamos por UN SHOT!</h1>
     <button type="button" (click)="rollTrack()" [class.is-rolling]="isRolling">
-      {{ isRolling ? 'Girando...' : 'Tirar ruleta' }}
+      {{ isRolling ? 'Girando...' : 'Girar la ruleta Trak!' }}
     </button>
   </section>
 
@@ -24,7 +24,7 @@
     [class.has-winner]="winnerGenre && !isRolling"
   >
     <div class="center-marker"></div>
-    <p class="roulette-kicker">Pop cultura + una que otra joyita</p>
+    <p class="roulette-kicker">Vamos a Trakear!</p>
     <div class="roulette-window">
       <span
         *ngFor="let genre of visibleGenres; let index = index"

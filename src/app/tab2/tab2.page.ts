@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {
   IonButtons,
@@ -11,6 +11,7 @@ import {
 } from '@ionic/angular/standalone';
 import { DeezerService, MusicTrack } from '../services/deezer.service';
 import { FavoritesService } from '../services/favorites.service';
+import { ProfileStateService } from '../services/profile-state.service';
 import { TrackPlayerComponent } from '../track-player/track-player.component';
 
 interface TrackSection {
@@ -42,6 +43,7 @@ interface GenreTag {
   ],
 })
 export class Tab2Page implements OnInit {
+  readonly avatar$ = inject(ProfileStateService).avatar$;
   query = '';
   selectedTag = 'Top del momento';
   tagTracks: MusicTrack[] = [];

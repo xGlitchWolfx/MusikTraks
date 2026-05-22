@@ -4,22 +4,30 @@
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
     <ion-title>Perfil</ion-title>
-    <img slot="end" class="toolbar-logo" src="assets/Ico.png" alt="MusicTraks" />
+    <img slot="end" class="toolbar-logo" [src]="photoUrl || 'assets/MTIconApp.png'" alt="MusicTraks" />
   </ion-toolbar>
 </ion-header>
 
 <ion-content fullscreen class="profile-page">
   <section class="profile-card">
     <img [src]="photoUrl" alt="Foto de perfil" />
-    <p>Perfil MusicTraks</p>
-    <h1>{{ username }}</h1>
+    <div>
+      <p>Cuenta MusicTraks</p>
+      <h1>{{ username }}</h1>
+      <span>{{ age ? age + ' años' : 'Perfil musical' }}</span>
+    </div>
   </section>
 
   <section class="edit-card">
+    <div class="form-heading">
+      <p>Editar perfil</p>
+      <strong>Datos visibles</strong>
+    </div>
+
     <p class="field-title">Foto</p>
     <div class="photo-actions">
       <button type="button" (click)="takePhoto()">Tomar foto</button>
-      <button type="button" (click)="chooseFromGallery()">Galeria</button>
+      <button type="button" (click)="chooseFromGallery()">Galería</button>
       <label class="file-action">
         Archivo PC
         <input type="file" accept="image/*" (change)="chooseFromFile($event)" />
@@ -38,7 +46,7 @@
 
     <label>
       Bio
-      <ion-textarea [(ngModel)]="bio" placeholder="Algo sobre tu musica"></ion-textarea>
+      <ion-textarea [(ngModel)]="bio" placeholder="Algo sobre tu música"></ion-textarea>
     </label>
 
     <p class="profile-message" *ngIf="profileMessage">{{ profileMessage }}</p>

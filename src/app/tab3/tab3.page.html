@@ -4,7 +4,7 @@
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
     <ion-title>Favoritas</ion-title>
-    <img slot="end" class="toolbar-logo" src="assets/Ico.png" alt="MusicTraks" />
+    <img slot="end" class="toolbar-logo" [src]="(avatar$ | async) || 'assets/MTIconApp.png'" alt="MusicTraks" />
   </ion-toolbar>
 </ion-header>
 
@@ -12,24 +12,24 @@
   <section class="score-card">
     <img src="assets/MTIconApp.png" alt="MusicTraks" />
     <div>
-      <p>Favoritas</p>
-      <h1>Canciones que marcaste con me gusta</h1>
+      <p>Biblioteca</p>
+      <h1>Tus canciones favoritas</h1>
     </div>
   </section>
 
   <ng-container *ngIf="favorites$ | async as favorites">
     <section class="empty-card" *ngIf="!favorites.length">
-      <h2>Aun no hay favoritas</h2>
-      <p>Ve a Discover o TRAK y toca el corazon de una cancion.</p>
+      <h2>Aún no hay favoritas</h2>
+      <p>Ve a Discover o TRAK y toca el corazón de una canción.</p>
     </section>
 
     <section class="liked-list" *ngIf="favorites.length">
       <article class="liked-card" *ngFor="let song of favorites; let index = index">
+        <span class="rank">{{ index + 1 }}</span>
         <img [src]="song.cover" [alt]="song.title" />
-        <div>
-          <span>{{ index + 1 }}</span>
+        <div class="song-copy">
           <h2>{{ song.title }}</h2>
-          <p>{{ song.artist }}</p>
+          <p>{{ song.artist }} · {{ song.album }}</p>
           <app-track-player [previewUrl]="song.preview"></app-track-player>
         </div>
         <button

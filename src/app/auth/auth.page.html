@@ -1,7 +1,7 @@
 <ion-content fullscreen class="auth-page">
   <main class="auth-shell">
     <img src="assets/MTIconApp.png" alt="MusicTraks" />
-    <h1>{{ mode === 'login' ? 'Iniciar sesion' : 'Crear cuenta' }}</h1>
+    <h1>{{ mode === 'login' ? 'Iniciar sesión' : 'Crear cuenta' }}</h1>
 
     <div class="mode-switch">
       <button type="button" [class.active]="mode === 'login'" (click)="switchMode('login')">
@@ -37,7 +37,7 @@
           name="password"
           [(ngModel)]="password"
           [autocomplete]="mode === 'login' ? 'current-password' : 'new-password'"
-          placeholder="Tu contrasena"
+          placeholder="Tu contraseña"
           required
         />
       </label>
@@ -55,23 +55,23 @@
           </li>
           <li [class.valid]="hasNumber">
             <span></span>
-            Minimo un numero
+            Mínimo un número
           </li>
           <li [class.valid]="passwordsMatch">
             <span></span>
-            Las contrasenas coinciden
+            Las contraseñas coinciden
           </li>
         </ul>
       </section>
 
       <label *ngIf="mode === 'register'">
-        Confirmar contrasena
+        Confirmar contraseña
         <input
           type="password"
           name="confirmPassword"
           [(ngModel)]="confirmPassword"
           autocomplete="new-password"
-          placeholder="Repite tu contrasena"
+          placeholder="Repite tu contraseña"
           required
         />
       </label>
@@ -86,7 +86,7 @@
 
   <div class="success-backdrop" *ngIf="showRegisterSuccess" (click)="closeRegisterSuccess()">
     <section class="success-popup" (click)="$event.stopPropagation()" role="status" aria-live="polite">
-      <p>te haz registrado correctamente revisa tu correo electronico</p>
+      <p>Te has registrado correctamente. Revisa tu correo electrónico.</p>
       <button class="submit-button" type="button" (click)="closeRegisterSuccess()">Entendido</button>
     </section>
   </div>

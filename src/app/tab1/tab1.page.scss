@@ -17,9 +17,11 @@ ion-menu-button {
   color: #101114;
   display: grid;
   gap: 12px;
-  margin: 18px;
+  margin: 18px auto;
+  max-width: min(560px, calc(100% - 36px));
   padding: 22px;
   text-align: center;
+  width: 100%;
 }
 
 .trak-hero img {
@@ -60,7 +62,9 @@ ion-menu-button {
 .roulette-card,
 .state-card,
 .result-card {
-  margin: 18px;
+  margin: 18px auto;
+  max-width: min(560px, calc(100% - 36px));
+  width: 100%;
 }
 
 .roulette-card {
@@ -178,7 +182,6 @@ ion-menu-button {
 .result-card {
   display: grid;
   gap: 14px;
-  max-width: 560px;
   position: relative;
 }
 

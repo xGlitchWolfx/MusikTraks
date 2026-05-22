@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, ElementRef, OnDestroy, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnDestroy, ViewChild, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import {
@@ -13,6 +13,7 @@ import {
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { AudioPlayerService } from '../services/audio-player.service';
+import { ProfileStateService } from '../services/profile-state.service';
 import { SupabaseService } from '../services/supabase.service';
 import { TrackPlayerComponent } from '../track-player/track-player.component';
 
@@ -35,6 +36,8 @@ type VisualSource = 'audio' | 'youtube';
   ],
 })
 export class VisualicerPage implements OnDestroy {
+  readonly avatar$ = inject(ProfileStateService).avatar$;
+
   @ViewChild('fileInput') fileInput?: ElementRef<HTMLInputElement>;
   @ViewChild('visualCanvas') visualCanvas?: ElementRef<HTMLCanvasElement>;
 
@@ -126,10 +129,10 @@ export class VisualicerPage implements OnDestroy {
         this.musicUrl = await this.supabaseService.uploadMusic(file, user.id);
         this.saveCachedMusic(this.musicUrl, this.musicName);
       } catch {
-        this.visualMessage = 'Storage no permitio guardar esta musica. El visualizer la usara localmente por ahora.';
+        this.visualMessage = 'Storage no permitió guardar esta música. El visualizer la usará localmente por ahora.';
       }
     } catch (error) {
-      this.visualMessage = error instanceof Error ? error.message : 'No se pudo subir la musica.';
+      this.visualMessage = error instanceof Error ? error.message : 'No se pudo subir la música.';
     } finally {
       this.isBusy = false;
       input.value = '';
@@ -155,10 +158,10 @@ export class VisualicerPage implements OnDestroy {
       this.clearCachedMusic();
       this.stopVisualizer();
       this.closeChangePopup();
-      this.visualMessage = 'Sube una musica';
+      this.visualMessage = 'Sube una música';
       window.setTimeout(() => this.openPicker(), 250);
     } catch (error) {
-      this.visualMessage = error instanceof Error ? error.message : 'No se pudo borrar la musica.';
+      this.visualMessage = error instanceof Error ? error.message : 'No se pudo borrar la música.';
     } finally {
       this.isBusy = false;
     }
@@ -208,9 +211,9 @@ export class VisualicerPage implements OnDestroy {
       const cachedMusic = this.getCachedMusic();
       this.musicUrl = profile?.music || cachedMusic.url;
       this.musicName = this.musicUrl ? cachedMusic.name || 'Musica subida en PLAY' : '';
-      this.visualMessage = this.musicUrl ? '' : 'Sube una musica o carga un URL.';
+      this.visualMessage = this.musicUrl ? '' : 'Sube una música o carga un URL.';
     } catch {
-      this.visualMessage = 'No se pudo cargar tu musica.';
+      this.visualMessage = 'No se pudo cargar tu música.';
     }
   }
 

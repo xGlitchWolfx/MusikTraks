@@ -19,7 +19,8 @@ ion-menu-button {
   display: grid;
   gap: 16px;
   grid-template-columns: 82px 1fr;
-  margin: 18px;
+  margin: 18px auto;
+  max-width: min(860px, calc(100% - 36px));
   padding: 18px;
 }
 
@@ -48,8 +49,10 @@ ion-menu-button {
   border: 1px solid #2a2d35;
   border-radius: 24px;
   color: #f7f7f2;
-  margin: 18px;
+  margin: 18px auto;
+  max-width: min(720px, calc(100% - 36px));
   padding: 18px;
+  text-align: center;
 }
 
 .empty-card h2 {
@@ -63,42 +66,46 @@ ion-menu-button {
 
 .liked-list {
   display: grid;
-  gap: 14px;
-  padding: 0 18px 28px;
+  gap: 12px;
+  margin: 0 auto;
+  max-width: min(860px, calc(100% - 36px));
+  padding: 0 0 28px;
 }
 
 .liked-card {
   align-items: center;
   background: #1a1c22;
   border: 1px solid #2a2d35;
-  border-radius: 24px;
+  border-radius: 18px;
   color: #f7f7f2;
   display: grid;
-  gap: 14px;
-  grid-template-columns: 96px 1fr 42px;
+  gap: 12px;
+  grid-template-columns: 34px 86px minmax(0, 1fr) 42px;
   padding: 12px;
 }
 
 .liked-card img {
   aspect-ratio: 1;
-  border-radius: 18px;
+  border-radius: 14px;
   object-fit: cover;
-  width: 96px;
+  width: 86px;
 }
 
-.liked-card span {
+.rank {
   background: #f6c90e;
   border-radius: 999px;
   color: #101114;
-  display: inline-block;
+  display: grid;
   font-size: 12px;
   font-weight: 900;
-  padding: 6px 10px;
+  height: 30px;
+  place-content: center;
+  width: 30px;
 }
 
 .liked-card h2 {
   font-size: 19px;
-  margin: 8px 0 4px;
+  margin: 0 0 4px;
 }
 
 .liked-card p {
