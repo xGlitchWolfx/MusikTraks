@@ -11,8 +11,8 @@
 <ion-content fullscreen class="trak-page">
   <section class="trak-hero">
     <img src="assets/MTIconApp.png" alt="MusicTraks" />
-    <p>MusicTraks roulette</p>
-    <h1>Es hora de TRAK!</h1>
+    <p>Ruleta de hits conocidos</p>
+    <h1>Que salga una que todos topen</h1>
     <button type="button" (click)="rollTrack()" [class.is-rolling]="isRolling">
       {{ isRolling ? 'Girando...' : 'Tirar ruleta' }}
     </button>
@@ -24,13 +24,15 @@
     [class.has-winner]="winnerGenre && !isRolling"
   >
     <div class="center-marker"></div>
+    <p class="roulette-kicker">Pop cultura + una que otra joyita</p>
     <div class="roulette-window">
       <span
         *ngFor="let genre of visibleGenres; let index = index"
         [class.is-center]="index === 1"
         [class.is-winner]="winnerGenre?.name === genre.name && index === 1 && !isRolling"
       >
-        {{ genre.name }}
+        <strong>{{ genre.name }}</strong>
+        <small>{{ genre.vibe }}</small>
       </span>
     </div>
   </section>
@@ -52,9 +54,11 @@
     <img [src]="track.cover" [alt]="track.title" />
     <div>
       <span class="badge">{{ winnerGenre?.name || 'Cancion aleatoria' }}</span>
+      <span class="badge badge-alt" *ngIf="winnerPick">{{ winnerPick.label }}</span>
       <h2>{{ track.title }}</h2>
-      <p>{{ track.artist }} · {{ track.album }}</p>
+      <p>{{ track.artist }} &middot; {{ track.album }}</p>
     </div>
     <app-track-player [previewUrl]="track.preview"></app-track-player>
   </section>
 </ion-content>
+

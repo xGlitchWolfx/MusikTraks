@@ -8,6 +8,8 @@
   min-height: 100%;
   padding: 30px 22px;
   place-content: center;
+  width: min(100%, 430px);
+  margin: 0 auto;
 }
 
 .auth-shell img {
@@ -82,9 +84,82 @@ input {
   padding: 0 14px;
 }
 
+.password-panel {
+  background: #172033;
+  border-radius: 18px;
+  color: rgba(247, 247, 242, 0.72);
+  display: grid;
+  gap: 12px;
+  padding: 14px;
+}
+
+.password-strength {
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+}
+
+.password-strength strong {
+  background: #2a3142;
+  border-radius: 999px;
+  color: #f7f7f2;
+  font-size: 13px;
+  padding: 8px 10px;
+}
+
+.password-strength.facil strong {
+  background: #ef4444;
+}
+
+.password-strength.normal strong {
+  background: #f59e0b;
+  color: #101114;
+}
+
+.password-strength.fuerte strong {
+  background: #22c55e;
+  color: #101114;
+}
+
+.password-checks {
+  display: grid;
+  gap: 9px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.password-checks li {
+  align-items: center;
+  color: rgba(247, 247, 242, 0.72);
+  display: flex;
+  font-size: 14px;
+  font-weight: 800;
+  gap: 9px;
+}
+
+.password-checks span {
+  background: rgba(247, 247, 242, 0.2);
+  border-radius: 50%;
+  height: 12px;
+  width: 12px;
+}
+
+.password-checks .valid {
+  color: #f7f7f2;
+}
+
+.password-checks .valid span {
+  background: #22c55e;
+}
+
 .submit-button {
   background: #f6c90e;
   color: #101114;
+}
+
+.submit-button:disabled {
+  opacity: 0.55;
 }
 
 .auth-message {
@@ -94,4 +169,28 @@ input {
   font-weight: 700;
   margin: 0;
   padding: 12px;
+}
+
+.success-backdrop {
+  background: rgba(16, 17, 20, 0.72);
+  display: grid;
+  inset: 0;
+  padding: 22px;
+  place-items: center;
+  position: fixed;
+  z-index: 20;
+}
+
+.success-popup {
+  background: #101114;
+  border: 2px solid #22c55e;
+  border-radius: 24px;
+  color: #22c55e;
+  padding: 22px;
+  text-align: center;
+}
+
+.success-popup p {
+  font-weight: 900;
+  margin-top: 0;
 }

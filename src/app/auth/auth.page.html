@@ -1,14 +1,14 @@
 <ion-content fullscreen class="auth-page">
   <main class="auth-shell">
     <img src="assets/MTIconApp.png" alt="MusicTraks" />
-    <h1>{{ mode === 'login' ? 'Login' : 'Registro' }}</h1>
+    <h1>{{ mode === 'login' ? 'Iniciar sesion' : 'Crear cuenta' }}</h1>
 
     <div class="mode-switch">
       <button type="button" [class.active]="mode === 'login'" (click)="switchMode('login')">
         Login
       </button>
       <button type="button" [class.active]="mode === 'register'" (click)="switchMode('register')">
-        Register
+        Registro
       </button>
     </div>
 
@@ -20,25 +20,74 @@
 
       <label>
         Email
-        <input type="email" name="email" [(ngModel)]="email" autocomplete="email" required />
+        <input
+          type="email"
+          name="email"
+          [(ngModel)]="email"
+          autocomplete="email"
+          placeholder="tu@email.com"
+          required
+        />
       </label>
 
       <label>
-        Password
+        Contrasena
         <input
           type="password"
           name="password"
           [(ngModel)]="password"
-          autocomplete="current-password"
+          [autocomplete]="mode === 'login' ? 'current-password' : 'new-password'"
+          placeholder="Tu contrasena"
+          required
+        />
+      </label>
+
+      <section class="password-panel" *ngIf="mode === 'register'" aria-live="polite">
+        <div class="password-strength" [ngClass]="passwordStrength">
+          <span>Seguridad</span>
+          <strong>{{ passwordStrengthLabel }}</strong>
+        </div>
+
+        <ul class="password-checks">
+          <li [class.valid]="hasMinimumLength">
+            <span></span>
+            6 caracteres
+          </li>
+          <li [class.valid]="hasNumber">
+            <span></span>
+            Minimo un numero
+          </li>
+          <li [class.valid]="passwordsMatch">
+            <span></span>
+            Las contrasenas coinciden
+          </li>
+        </ul>
+      </section>
+
+      <label *ngIf="mode === 'register'">
+        Confirmar contrasena
+        <input
+          type="password"
+          name="confirmPassword"
+          [(ngModel)]="confirmPassword"
+          autocomplete="new-password"
+          placeholder="Repite tu contrasena"
           required
         />
       </label>
 
       <p class="auth-message" *ngIf="authMessage">{{ authMessage }}</p>
 
-      <button class="submit-button" type="submit" [disabled]="isLoading">
+      <button class="submit-button" type="submit" [disabled]="isLoading || (mode === 'register' && !canRegister)">
         {{ isLoading ? 'Conectando...' : mode === 'login' ? 'Entrar' : 'Crear cuenta' }}
       </button>
     </form>
   </main>
+
+  <div class="success-backdrop" *ngIf="showRegisterSuccess" (click)="closeRegisterSuccess()">
+    <section class="success-popup" (click)="$event.stopPropagation()" role="status" aria-live="polite">
+      <p>te haz registrado correctamente revisa tu correo electronico</p>
+      <button class="submit-button" type="button" (click)="closeRegisterSuccess()">Entendido</button>
+    </section>
+  </div>
 </ion-content>

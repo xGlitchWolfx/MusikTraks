@@ -1,0 +1,153 @@
+ion-toolbar {
+  --background: #101114;
+  --color: #f7f7f2;
+}
+
+ion-menu-button {
+  --color: #f6c90e;
+}
+
+.visual-page {
+  --background: #0d0e11;
+  position: relative;
+}
+
+canvas {
+  height: 100%;
+  inset: 0;
+  position: absolute;
+  width: 100%;
+  z-index: 0;
+}
+
+.visual-content {
+  min-height: 100%;
+  padding: 18px;
+  position: relative;
+  z-index: 1;
+}
+
+.visual-stage {
+  border-radius: 26px;
+  min-height: 240px;
+  overflow: hidden;
+  position: relative;
+}
+
+.visual-stage.is-active {
+  border-color: #f6c90e;
+}
+
+.video-frame {
+  inset: 16px;
+  position: absolute;
+}
+
+iframe {
+  border: 0;
+  border-radius: 18px;
+  height: 100%;
+  width: 100%;
+}
+
+.visual-card,
+.change-popup {
+  background: rgba(26, 28, 34, 0.92);
+  border: 1px solid #2a2d35;
+  border-radius: 26px;
+  color: #f7f7f2;
+  display: grid;
+  gap: 14px;
+  padding: 16px;
+}
+
+.visual-card {
+  backdrop-filter: blur(8px);
+}
+
+.visual-heading {
+  align-items: center;
+  display: flex;
+  gap: 12px;
+  justify-content: space-between;
+}
+
+.visual-heading p,
+label {
+  color: #f6c90e;
+  font-size: 13px;
+  font-weight: 900;
+  margin: 0;
+  text-transform: uppercase;
+}
+
+.visual-heading h1 {
+  font-size: 28px;
+  margin: 4px 0 0;
+}
+
+button {
+  background: #f6c90e;
+  border: 0;
+  border-radius: 16px;
+  color: #101114;
+  font-weight: 900;
+  min-height: 48px;
+  padding: 0 14px;
+}
+
+audio,
+input {
+  width: 100%;
+}
+
+input[type='file'] {
+  display: none;
+}
+
+input[type='url'] {
+  background: #101114;
+  border: 0;
+  border-radius: 16px;
+  color: #f7f7f2;
+  font-size: 16px;
+  margin-top: 8px;
+  min-height: 52px;
+  outline: none;
+  padding: 0 14px;
+}
+
+.empty-audio,
+.visual-message,
+.change-popup p {
+  color: #a7a7a7;
+  margin: 0;
+}
+
+.empty-audio {
+  display: grid;
+  gap: 12px;
+}
+
+.change-backdrop {
+  background: rgba(16, 17, 20, 0.76);
+  display: grid;
+  inset: 0;
+  padding: 22px;
+  place-items: center;
+  position: fixed;
+  z-index: 20;
+}
+
+.change-popup {
+  width: min(100%, 360px);
+}
+
+.youtube-button {
+  background: #22d3ee;
+}
+
+.delete-button {
+  background: #ef4444;
+  color: #f7f7f2;
+}

@@ -1,0 +1,63 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Visualicer</ion-title>
+    <img slot="end" class="toolbar-logo" src="assets/Ico.png" alt="MusicTraks" />
+  </ion-toolbar>
+</ion-header>
+
+<ion-content fullscreen class="visual-page">
+  <canvas #visualCanvas width="720" height="1280"></canvas>
+
+  <main class="visual-content">
+    <section class="visual-stage" [class.is-active]="isVisualizing">
+    <div class="video-frame" *ngIf="source === 'youtube' && youtubeEmbedUrl">
+      <iframe [src]="youtubeEmbedUrl" title="YouTube visualicer" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+    </div>
+  </section>
+
+  <section class="visual-card">
+    <div class="visual-heading">
+      <div>
+        <p>Visualicer</p>
+        <h1>{{ source === 'youtube' ? 'URL de YouTube' : 'Audio subido' }}</h1>
+      </div>
+      <button type="button" (click)="openChangePopup()">Cambiar</button>
+    </div>
+
+    <div *ngIf="source === 'audio'; else youtubeForm">
+      <app-track-player *ngIf="musicUrl" [previewUrl]="musicUrl"></app-track-player>
+
+      <div class="empty-audio" *ngIf="!musicUrl">
+        <p>Si ya subiste una musica en PLAY se carga automaticamente aqui.</p>
+        <button type="button" (click)="openPicker()">Subir musica</button>
+      </div>
+    </div>
+
+    <ng-template #youtubeForm>
+      <label>
+        URL de YouTube
+        <input type="url" [(ngModel)]="youtubeUrl" placeholder="https://youtube.com/watch?v=..." />
+      </label>
+      <button class="load-button" type="button" (click)="loadYoutube()">Cargar</button>
+    </ng-template>
+
+    <input #fileInput type="file" accept="audio/*" (change)="chooseMusic($event)" />
+    <p class="visual-message" *ngIf="visualMessage">{{ visualMessage }}</p>
+  </section>
+  </main>
+
+  <div class="change-backdrop" *ngIf="showChangePopup" (click)="closeChangePopup()">
+    <section class="change-popup" (click)="$event.stopPropagation()">
+      <h2>Cambiar fuente</h2>
+      <p *ngIf="musicUrl">{{ musicName }}</p>
+      <button type="button" (click)="openPicker()">Subir nueva musica</button>
+      <button type="button" class="youtube-button" (click)="useYoutubeMode()">URL de YouTube</button>
+      <button type="button" class="delete-button" *ngIf="musicUrl" (click)="deleteMusic()" [disabled]="isBusy">
+        Eliminar
+      </button>
+    </section>
+  </div>
+</ion-content>

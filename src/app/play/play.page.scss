@@ -1,0 +1,108 @@
+ion-toolbar {
+  --background: #101114;
+  --color: #f7f7f2;
+}
+
+ion-menu-button {
+  --color: #f6c90e;
+}
+
+.play-page {
+  --background: #0d0e11;
+}
+
+.play-hero,
+.play-card,
+.play-message {
+  margin: 18px;
+}
+
+.play-hero {
+  background: #f6c90e;
+  border-radius: 28px;
+  color: #101114;
+  display: grid;
+  gap: 12px;
+  padding: 22px;
+  text-align: center;
+}
+
+.play-hero p,
+.field-title {
+  font-size: 13px;
+  font-weight: 900;
+  margin: 0;
+  text-transform: uppercase;
+}
+
+.play-hero h1 {
+  font-size: clamp(32px, 9vw, 48px);
+  line-height: 1;
+  margin: 0;
+}
+
+.play-hero button,
+.effect-grid button,
+.delete-button {
+  border: 0;
+  border-radius: 16px;
+  font-weight: 900;
+  min-height: 52px;
+}
+
+.play-hero button {
+  background: #101114;
+  color: #f6c90e;
+}
+
+.play-hero input {
+  display: none;
+}
+
+.play-card {
+  background: #1a1c22;
+  border: 1px solid #2a2d35;
+  border-radius: 26px;
+  color: #f7f7f2;
+  display: grid;
+  gap: 16px;
+  padding: 16px;
+}
+
+.effect-grid {
+  display: grid;
+  gap: 10px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.effect-grid button {
+  background: #101114;
+  color: #f7f7f2;
+}
+
+.effect-grid .active {
+  background: #f6c90e;
+  color: #101114;
+}
+
+.effect-note {
+  color: #a7a7a7;
+  margin: 0;
+}
+
+.empty-card {
+  min-height: 180px;
+}
+
+.delete-button {
+  background: #ef4444;
+  color: #f7f7f2;
+}
+
+.play-message {
+  background: #1a1c22;
+  border-radius: 16px;
+  color: #f6c90e;
+  font-weight: 900;
+  padding: 12px;
+}

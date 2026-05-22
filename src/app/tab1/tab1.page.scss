@@ -38,7 +38,7 @@ ion-menu-button {
 }
 
 .trak-hero h1 {
-  font-size: clamp(34px, 10vw, 54px);
+  font-size: clamp(34px, 9vw, 50px);
   line-height: 0.96;
   margin: 0;
 }
@@ -64,12 +64,40 @@ ion-menu-button {
 }
 
 .roulette-card {
-  background: #1a1c22;
-  border: 1px solid #2a2d35;
+  background: #191b22;
+  border: 2px solid #f6c90e;
   border-radius: 24px;
+  box-shadow: 0 18px 42px rgba(0, 0, 0, 0.34);
   overflow: hidden;
   padding: 14px;
   position: relative;
+}
+
+.roulette-card::before {
+  background: linear-gradient(90deg, transparent, rgba(246, 201, 14, 0.28), transparent);
+  content: '';
+  height: 100%;
+  left: -45%;
+  position: absolute;
+  top: 0;
+  transform: skewX(-18deg);
+  width: 38%;
+}
+
+.roulette-card.is-rolling::before {
+  animation: lightSweep 780ms linear infinite;
+}
+
+.roulette-kicker {
+  color: #f6c90e;
+  font-size: 12px;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  margin: 0 0 12px;
+  position: relative;
+  text-align: center;
+  text-transform: uppercase;
+  z-index: 1;
 }
 
 .roulette-window {
@@ -78,18 +106,33 @@ ion-menu-button {
   grid-auto-flow: column;
   grid-template-columns: 34% 1fr 34%;
   overflow: hidden;
+  position: relative;
   transition: transform 120ms ease-out;
+  z-index: 1;
 }
 
 .roulette-window span {
   background: #f6c90e;
   border-radius: 18px;
   color: #101114;
-  font-size: 18px;
-  font-weight: 900;
+  display: grid;
+  gap: 5px;
+  min-height: 82px;
+  place-content: center;
   padding: 18px 12px;
   text-align: center;
   transition: opacity 160ms ease, transform 160ms ease;
+}
+
+.roulette-window strong {
+  font-size: 18px;
+  font-weight: 900;
+}
+
+.roulette-window small {
+  color: rgba(16, 17, 20, 0.68);
+  font-size: 11px;
+  font-weight: 900;
 }
 
 .roulette-window span:not(.is-center) {
@@ -98,7 +141,7 @@ ion-menu-button {
 }
 
 .roulette-window .is-center {
-  box-shadow: 0 0 0 3px rgba(246, 201, 14, 0.22);
+  box-shadow: 0 0 0 3px rgba(246, 201, 14, 0.22), 0 12px 30px rgba(246, 201, 14, 0.24);
   transform: scale(1);
 }
 
@@ -111,15 +154,7 @@ ion-menu-button {
 }
 
 .center-marker {
-  border: 2px solid #f6c90e;
-  border-radius: 22px;
-  bottom: 10px;
-  left: 36%;
-  pointer-events: none;
-  position: absolute;
-  right: 36%;
-  top: 10px;
-  z-index: 2;
+  display: none;
 }
 
 .state-card,
@@ -174,6 +209,11 @@ ion-menu-button {
   font-size: 12px;
   font-weight: 900;
   padding: 7px 10px;
+}
+
+.badge-alt {
+  background: #22d3ee;
+  margin-left: 6px;
 }
 
 .favorite-button {
@@ -247,5 +287,11 @@ ion-menu-button {
 
   100% {
     transform: scale(1);
+  }
+}
+
+@keyframes lightSweep {
+  to {
+    left: 110%;
   }
 }

@@ -1,0 +1,53 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>PLAY</ion-title>
+    <img slot="end" class="toolbar-logo" src="assets/Ico.png" alt="MusicTraks" />
+  </ion-toolbar>
+</ion-header>
+
+<ion-content fullscreen class="play-page">
+  <section class="play-hero">
+    <p>Laboratorio musical</p>
+    <h1>Sube una musica y juega con efectos</h1>
+    <button type="button" (click)="openPicker()" [disabled]="isBusy">
+      {{ musicUrl ? 'Cambiar musica' : 'Sube una musica' }}
+    </button>
+    <input #fileInput type="file" accept="audio/*" (change)="chooseMusic($event)" />
+  </section>
+
+  <section class="play-card" *ngIf="musicUrl; else emptyState">
+    <p class="field-title">{{ musicName }}</p>
+    <app-track-player [previewUrl]="musicUrl"></app-track-player>
+
+    <button class="delete-button" type="button" (click)="deleteMusic()" [disabled]="isBusy">
+      Borrar musica
+    </button>
+  </section>
+
+  <section class="play-card effects-card" *ngIf="musicUrl">
+    <p class="field-title">Efectos</p>
+    <div class="effect-grid">
+      <button
+        type="button"
+        *ngFor="let effect of effects"
+        [class.active]="selectedEffect === effect.id"
+        (click)="selectEffect(effect.id)"
+      >
+        {{ effect.label }}
+      </button>
+    </div>
+
+    <p class="effect-note" *ngIf="selectedEffect === 'reverb' || selectedEffect === 'inverso'">
+      {{ selectedEffect === 'reverb' ? 'Reverb activo con eco y cola corta.' : 'Inverso FX activo con eco filtrado.' }}
+    </p>
+  </section>
+
+  <ng-template #emptyState>
+    <section class="play-card empty-card"></section>
+  </ng-template>
+
+  <p class="play-message" *ngIf="playMessage">{{ playMessage }}</p>
+</ion-content>

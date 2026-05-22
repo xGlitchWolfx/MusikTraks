@@ -27,6 +27,16 @@ export const routes: Routes = [
           import('../tab4/tab4.page').then((m) => m.Tab4Page),
       },
       {
+        path: 'play',
+        loadComponent: () =>
+          import('../play/play.page').then((m) => m.PlayPage),
+      },
+      {
+        path: 'visualicer',
+        loadComponent: () =>
+          import('../visualicer/visualicer.page').then((m) => m.VisualicerPage),
+      },
+      {
         path: '',
         redirectTo: 'tab1',
         pathMatch: 'full',

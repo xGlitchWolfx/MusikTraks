@@ -11,7 +11,14 @@ import {
 } from '@ionic/angular/standalone';
 import { RouterLink } from '@angular/router';
 import { addIcons } from 'ionicons';
-import { compassOutline, heartOutline, personOutline, radioOutline } from 'ionicons/icons';
+import {
+  compassOutline,
+  heartOutline,
+  personOutline,
+  playCircleOutline,
+  pulseOutline,
+  radioOutline,
+} from 'ionicons/icons';
 
 @Component({
   selector: 'app-tabs',
@@ -33,6 +40,13 @@ export class TabsPage {
   public environmentInjector = inject(EnvironmentInjector);
 
   constructor() {
-    addIcons({ compassOutline, heartOutline, personOutline, radioOutline });
+    addIcons({
+      compassOutline,
+      heartOutline,
+      personOutline,
+      playCircleOutline,
+      pulseOutline,
+      radioOutline,
+    });
   }
 }
